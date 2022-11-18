@@ -1,0 +1,16 @@
+<template>
+  <div class="">
+    <NuxtPage />
+  </div>
+</template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
