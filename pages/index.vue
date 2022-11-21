@@ -97,18 +97,18 @@ const onSlideChange = () => {
 }
 
 #funky-collection-slide {
-  background: url('~~/img/Big\ Banner.png') top center / cover;
+  background: url('~~/img/Banner.png') top center / cover;
 }
 
 #jewellery-collection-slide {
-  background: url('~~/img/image\ 3.png') top center / cover;
+  background: url('~~/img/necklace.png') top center / cover;
 }
 
 #first-sale-image {
-  background: url('~~/img/image.png') top center / cover;
+  background: url('~~/img/black.png') top center / cover;
 }
 
 #second-sale-image {
-  background: url('~~/img/image-1.png') top center / cover;
+  background: url('~~/img/mens-hoodies.png') top center / cover;
 }
 </style>

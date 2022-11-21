@@ -19,6 +19,6 @@ import NormalHeader from '~~/layouts/NormalHeader.vue';
 
 <style lang="scss" scoped>
 .main {
-  background: url('~~/img/visual\ search\ 1.png') top center / cover;
+  background: url('~~/img/search.png') top center / cover;
 }
 </style>
