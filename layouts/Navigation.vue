@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav fixed bottom-0 left-o w-[100vw] bg-white rounded-t-2xl">
+  <nav class="nav fixed bottom-0 left-o w-[100vw] bg-slate-50 rounded-t-2xl z-50">
     <ul
       class="nav__items-container flex items-center justify-evenly w-full min-h-[13vh]"
       ref="navItemsContainer"
@@ -63,6 +63,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.nav {
+  box-shadow: 0 -2px 10px 3px rgba(#000, 0.1);
+}
+
 .active {
   color: rgb(239 68 68);
 }

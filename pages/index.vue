@@ -49,7 +49,7 @@
         </swiper-slide>
       </swiper>
       <div
-        class="sales-highlight-container grid grid-cols-2 grid-rows-2 min-h-[50vh]"
+        class="sales-highlight-container grid grid-cols-2 grid-rows-2 min-h-[60vh]"
       >
         <h2
           class="sale-highlight-header flex justify-center items-center col-span-1 col-start-1 text-red-600 text-2xl font-bold px-4"
@@ -68,14 +68,16 @@
         ></div>
       </div>
     </section>
-    <section class="products-section">
-      
+    <section class="products-section pl-4">
+      <Products categoryName="Sale" categoryInfo="Super summer sale" />
+      <Products categoryName="New" categoryInfo="You've never seen it before" />
     </section>
   </main>
 </template>
 
 <script setup>
 import Navigation from '~~/layouts/Navigation.vue';
+import Products from '~~/layouts/Products.vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';

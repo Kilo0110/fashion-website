@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 min-h-[100vh]">
+  <div class="bg-gray-50 min-h-[100vh] px-3 pt-3">
     <HeaderLayout headerTitle="Recover password" />
     <p class="text-xs">
       Please, enter your email address. You will receive a link to create a new password via email.

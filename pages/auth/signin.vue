@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 min-h-[100vh]">
+  <div class="bg-gray-50 min-h-[100vh] px-3 pt-3">
     <HeaderLayout headerTitle="Login" />
     <FormLayout>
       <template #inputs>
