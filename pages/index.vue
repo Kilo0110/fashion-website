@@ -76,7 +76,6 @@
 </template>
 
 <script setup>
-import Navigation from '~~/layouts/Navigation.vue';
 import Products from '~~/layouts/Products.vue';
 
 // Import Swiper Vue.js components

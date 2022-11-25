@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 min-h-[100vh] px-3 pt-3">
     <HeaderLayout headerTitle="Sign up" />
-    <FormLayout>
+    <FormLayout buttonText="Create Account">
       <template #inputs>
         <Input
           inputName="username"
@@ -35,7 +35,6 @@
         />
       </client-only>
     </NuxtLink>
-    <CallToActionBtn buttonText="Sign up" />
 
     <footer class="footer text-center mt-14">
       <p class="text-sm">Or sign up with a social account</p>

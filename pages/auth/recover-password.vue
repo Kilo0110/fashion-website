@@ -4,7 +4,7 @@
     <p class="text-xs">
       Please, enter your email address. You will receive a link to create a new password via email.
     </p>
-    <FormLayout>
+    <FormLayout buttonText="Send link">
       <template #inputs>
         <Input
           inputName="useremail"
@@ -14,7 +14,6 @@
         />
       </template>
     </FormLayout>
-    <CallToActionBtn buttonText="Send" />
 
   </div>
 </template>

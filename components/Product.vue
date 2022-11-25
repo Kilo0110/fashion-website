@@ -19,14 +19,7 @@
         </client-only>
       </button>
     </div>
-    <div class="rating-container flex gap-1">
-      <client-only v-for="rating in props.rating">
-        <font-awesome-icon
-          :icon="['fas', 'star']"
-          class="text-amber-400 text-xs"
-        />
-      </client-only>
-    </div>
+    <Ratings :rating="props.rating" />
     <p class="product-designer text-xs text-gray-800">
       {{ props.productDesigner }}
     </p>

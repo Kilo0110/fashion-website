@@ -1,16 +1,15 @@
 <template>
   <div class="input-container bg-white py-2 px-4 flex flex-col gap-1 shadow-md relative">
     <label
-      class="text-sm text-slate-400"
+      class="text-xs text-slate-400"
       :for="props.inputName"
       >{{ inputLabel }}</label
     >
     <input
-      class="text-black text-md"
+      class="text-black text-sm rounded-lg"
       :type="props.inputType"
       :name="props.inputName"
       :placeholder="props.inputPlaceholder"
-      :class="props.additionalClasses"
     />
     <client-only>
       <font-awesome-icon
@@ -38,11 +37,7 @@ const props = defineProps({
   inputPlaceholder: {
     type: String,
     required: true,
-  },
-  additionalClasses: {
-    type: Array,
-    default: [],
-  },
+  }
 });
 </script>
 

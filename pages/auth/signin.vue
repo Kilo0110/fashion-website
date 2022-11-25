@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 min-h-[100vh] px-3 pt-3">
     <HeaderLayout headerTitle="Login" />
-    <FormLayout>
+    <FormLayout buttonText="Login">
       <template #inputs>
         <Input
           inputName="useremail"
@@ -29,7 +29,6 @@
         />
       </client-only>
     </NuxtLink>
-    <CallToActionBtn buttonText="Login" />
 
     <footer class="footer text-center mt-14">
       <p class="text-sm">Or log in with a social account</p>

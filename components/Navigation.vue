@@ -4,12 +4,14 @@
       class="nav__items-container flex items-center justify-evenly w-full min-h-[13vh]"
       ref="navItemsContainer"
     >
-      <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
-        <client-only>
-          <font-awesome-icon :icon="['fas', 'home']" />
-        </client-only>
-        <span class="nav__item-name text-xs font-bold">Home</span>
-      </li>
+      <NuxtLink to="/">
+        <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
+          <client-only>
+            <font-awesome-icon :icon="['fas', 'home']" />
+          </client-only>
+          <span class="nav__item-name text-xs font-bold">Home</span>
+        </li>
+      </NuxtLink>
       <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
         <client-only>
           <font-awesome-icon :icon="['fas', 'cart-shopping']" />
@@ -28,12 +30,14 @@
         </client-only>
         <span class="nav__item-name text-xs font-bold">Favourite</span>
       </li>
-      <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
-        <client-only>
-          <font-awesome-icon :icon="['fas', 'user']" />
-        </client-only>
-        <span class="nav__item-name text-xs font-bold">Profile</span>
-      </li>
+      <NuxtLink to="/profile/">
+        <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
+          <client-only>
+            <font-awesome-icon :icon="['fas', 'user']" />
+          </client-only>
+          <span class="nav__item-name text-xs font-bold">Profile</span>
+        </li>
+      </NuxtLink>
     </ul>
   </nav>
 </template>
