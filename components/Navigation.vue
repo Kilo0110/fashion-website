@@ -24,12 +24,14 @@
         </client-only>
         <span class="nav__item-name text-xs font-bold">Bag</span>
       </li>
-      <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
-        <client-only>
-          <font-awesome-icon :icon="['fas', 'heart']" />
-        </client-only>
-        <span class="nav__item-name text-xs font-bold">Favourite</span>
-      </li>
+      <NuxtLink to="/profile/favourites">
+        <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
+          <client-only>
+            <font-awesome-icon :icon="['fas', 'heart']" />
+          </client-only>
+          <span class="nav__item-name text-xs font-bold">Favourite</span>
+        </li>
+      </NuxtLink>
       <NuxtLink to="/profile/">
         <li class="nav__item flex flex-col gap-1 items-center cursor-pointer">
           <client-only>

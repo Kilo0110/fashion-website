@@ -16,26 +16,30 @@
       </div>
     </div>
     <ul class="profile-actions-list mt-6 mb-20 flex flex-col gap-7">
-      <li class="profile-action cursor-pointer relative">
-        <p class="text-sm font-bold">Edit Profile</p>
-        <p class="text-xs text-gray-400 font-bold">Update your information</p>
-        <client-only>
-          <font-awesome-icon
-            class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
-            :icon="['fas', 'chevron-right']"
-          />
-        </client-only>
-      </li>
-      <li class="profile-action cursor-pointer relative">
-        <p class="text-sm font-bold">My Favourites</p>
-        <p class="text-xs text-gray-400 font-bold">30 favourites</p>
-        <client-only>
-          <font-awesome-icon
-            class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
-            :icon="['fas', 'chevron-right']"
-          />
-        </client-only>
-      </li>
+      <NuxtLink to="/profile/edit-profile">
+        <li class="profile-action cursor-pointer relative">
+          <p class="text-sm font-bold">Edit Profile</p>
+          <p class="text-xs text-gray-400 font-bold">Update your information</p>
+          <client-only>
+            <font-awesome-icon
+              class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
+              :icon="['fas', 'chevron-right']"
+            />
+          </client-only>
+        </li>
+      </NuxtLink>
+      <NuxtLink to="/profile/favourites">
+        <li class="profile-action cursor-pointer relative">
+          <p class="text-sm font-bold">My Favourites</p>
+          <p class="text-xs text-gray-400 font-bold">30 favourites</p>
+          <client-only>
+            <font-awesome-icon
+              class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
+              :icon="['fas', 'chevron-right']"
+            />
+          </client-only>
+        </li>
+      </NuxtLink>
       <NuxtLink to="/profile/shipping-address">
         <li class="profile-action cursor-pointer relative">
           <p class="text-sm font-bold">Shipping addresses</p>
@@ -72,17 +76,19 @@
           />
         </client-only>
       </li>
-      <li class="profile-action cursor-pointer relative">
-        <p class="text-sm font-bold">My reviews</p>
-        <p class="text-xs text-gray-400 font-bold">Reviewed 4 items</p>
-        <client-only>
-          <font-awesome-icon
-            class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
-            :icon="['fas', 'chevron-right']"
-          />
-        </client-only>
-      </li>
-      <li class="profile-action cursor-pointer relative">
+      <NuxtLink to="/profile/reviews">
+        <li class="profile-action cursor-pointer relative">
+          <p class="text-sm font-bold">My reviews</p>
+          <p class="text-xs text-gray-400 font-bold">Reviewed 4 items</p>
+          <client-only>
+            <font-awesome-icon
+              class="absolute top-1/2 -translate-y-1/2 right-2 text-sm text-gray-400"
+              :icon="['fas', 'chevron-right']"
+            />
+          </client-only>
+        </li>
+      </NuxtLink>
+      <li class="profile-action cursor-pointer relative" @click="logUserOut">
         <p class="text-sm font-bold">Logout</p>
         <p class="text-xs text-gray-400 font-bold">End your session</p>
         <client-only>
@@ -98,6 +104,17 @@
 
 <script setup>
 import BoldHeader from '~~/layouts/BoldHeader.vue';
+import { useUserStore } from '~~/store/user';
+
+const userStore = useUserStore();
+
+definePageMeta({
+  middleware: 'auth'
+})
+
+const logUserOut = () => {
+  userStore.logUserOut()
+}
 </script>
 
 <style lang="scss" scoped></style>

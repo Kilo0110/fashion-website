@@ -1,26 +1,36 @@
 <template>
-  <div class="input-container bg-white py-2 px-4 flex flex-col gap-1 shadow-md relative">
+  <div
+    class="relative flex flex-col gap-1 px-4 py-2 bg-white shadow-md input-container"
+  >
     <label
       class="text-xs text-slate-400"
       :for="props.inputName"
       >{{ inputLabel }}</label
     >
     <input
-      class="text-black text-sm rounded-lg"
+      class="text-sm text-black rounded-lg"
       :type="props.inputType"
       :name="props.inputName"
       :placeholder="props.inputPlaceholder"
+      :value="props.modelValue"
+      @input="(event) => emits('update:modelValue', event.target.value)"
     />
-    <client-only>
+
+    <client-only v-if="!props.isPassword">
       <font-awesome-icon
-        :icon="['fas', 'check']"
-        class="text-green-500 absolute top-1/2 -translate-y-1/2 right-4 bg-white"
+        :icon="props.isValid ? ['fas', 'check'] : ['fas', 'xmark']"
+        class="absolute -translate-y-1/2 bg-white top-1/2 right-4"
+        :class="props.isValid ? 'text-green-500' : 'text-red-500'"
       />
     </client-only>
+    <div v-if="props.isPassword" class="mt-1 password-error-message text-xs italic text-red-500 w-full">
+      {{props.passwordError}}
+    </div>
   </div>
 </template>
 
 <script setup>
+const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
   inputName: {
     type: String,
@@ -37,7 +47,22 @@ const props = defineProps({
   inputPlaceholder: {
     type: String,
     required: true,
-  }
+  },
+  isValid: {
+    type: Boolean,
+    default: false,
+  },
+  isPassword: {
+    type: Boolean,
+    default: false,
+  },
+  passwordError: {
+    type: String,
+    default: '',
+  },
+  modelValue: {
+    type: String,
+  },
 });
 </script>
 

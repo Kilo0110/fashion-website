@@ -1,6 +1,7 @@
 <template>
   <NormalHeader headerTitle="Favourites" />
-  <main class="main px-3 pt-3">
+  <Navigation :activeItem="3" />
+  <main class="main px-3 pt-3 bg-gray-50">
     <swiper
       class="filter-carousel"
       :slidesPerView="4"
@@ -66,7 +67,7 @@
           "
         ></span>
       </p>
-      <button class="layout-toggle">
+      <button @click="toggleLayout" class="layout-toggle">
         <client-only>
           <font-awesome-icon
             :icon="layoutIsGrid ? ['fas', 'grip-vertical'] : ['fas', 'list']"
@@ -78,18 +79,8 @@
       class="favourites-container"
       :class="layoutIsGrid ? 'grid-layout' : 'flex-layout'"
     >
-      <div
-        class="favourite-item"
-        :class="
-          layoutIsGrid
-            ? 'favourite-item-grid-layout'
-            : 'favourite-item-flex-layout'
-        "
-      >
-        <img src="" alt="" class="favourite__img rounded-lg w-20 aspect-square">
-        <Ratings :rating="props.rating" />
-        <p class="favourite-item__name">{{props.itemName}}</p>
-      </div>
+      <FavouriteItem :rating=5 itemName="Lime" itemType="Shirt" itemColour="Blue" itemSize="L" itemPrice="32" :layoutIsGrid=layoutIsGrid />
+      <FavouriteItem :rating=0 itemName="Mango" itemType="Longsleeve Violeta" itemColour="Orange" itemSize="S" itemPrice="42" :layoutIsGrid=layoutIsGrid />
     </div>
   </main>
 </template>
@@ -103,13 +94,13 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // Import Swiper styles
 import 'swiper/css';
 
-const props = defineProps({
-  rating: {
-    type: Number
-  }
-})
+import { ref } from 'vue';
 
-let layoutIsGrid = true;
+let layoutIsGrid = ref(false)
+
+const toggleLayout = () => {
+  layoutIsGrid.value = !layoutIsGrid.value;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -123,9 +114,5 @@ let layoutIsGrid = true;
   display: flex;
   flex-direction: column;
   gap: 3em;
-}
-
-.favourite-item-grid-layout {
-
 }
 </style>
