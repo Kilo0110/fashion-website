@@ -1,5 +1,5 @@
 <template>
-  <button class="block w-full text-white text-center text-xs py-3 uppercase rounded-full shadow-md transition-all duration-300 active:scale-90" :class="props.isColored ? 'bg-red-600' : 'bg-transparent border-2 border-white hover:bg-red-600 hover:border-red-600'">
+  <button @click="handleClick" class="block w-full text-white text-center text-xs py-3 uppercase rounded-full shadow-md transition-all duration-300 active:scale-90" :class="props.isColored ? 'bg-red-600' : 'bg-transparent border-2 border-white hover:bg-red-600 hover:border-red-600'">
     {{ props.buttonText }}
   </button>
 </template>
@@ -14,11 +14,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  additionalClasses: {
-    type: String,
-    default: true,
-  },
 });
+
+const emits = defineEmits(["onClick"])
+
+const handleClick = (event) => {
+  emits("onClick", event);
+}
 </script>
 
 <style lang="scss" scoped></style>
