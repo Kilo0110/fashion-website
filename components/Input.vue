@@ -15,7 +15,7 @@
       :value="props.modelValue"
       @input="(event) => emits('update:modelValue', event.target.value)"
     />
-
+    
     <client-only v-if="!props.isPassword">
       <font-awesome-icon
         :icon="props.isValid ? ['fas', 'check'] : ['fas', 'xmark']"
@@ -23,6 +23,14 @@
         :class="props.isValid ? 'text-green-500' : 'text-red-500'"
       />
     </client-only>
+
+    <client-only v-if="props.isPassword">
+      <font-awesome-icon @click="makePasswordVisible"
+        :icon="showPassword ? ['fas', 'eye-slash'] : ['fas', 'eye']"
+        class="absolute -translate-y-1/2 bg-white top-1/2 right-4 cursor-pointer"
+      />
+    </client-only>
+
     <div v-if="props.isPassword" class="mt-1 password-error-message text-xs italic text-red-500 w-full">
       {{props.passwordError}}
     </div>
@@ -64,6 +72,14 @@ const props = defineProps({
     type: String,
   },
 });
+const showPassword = ref(true)
+
+const makePasswordVisible = () => {
+  showPassword.value = !showPassword.value
+  if (props.inputType === 'password') {
+    props.inputType = 'text'
+  } else props.inputType = 'password'
+}
 </script>
 
 <style lang="scss" scoped>
