@@ -3,7 +3,7 @@
     <HeaderLayout headerTitle="Sign up" />
     <FormLayout
       buttonText="Create Account"
-      @submit.prevent="handleSubmit"
+      @submit.prevent="signUp(showLoader, email, password)"
     >
       <template #inputs>
         <Input
@@ -59,18 +59,55 @@
       </div>
     </footer>
   </div>
+  <transition name="toast">
+    <Toast
+      :warning="toastOptions.isWarning"
+      :error="toastOptions.isError"
+      :text="toastOptions.text"
+      v-if="showToast"
+    />
+  </transition>
+  <div class="loading-overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-slate-800 opacity-40 flex justify-center items-center" v-if="showLoader">
+    <component :is="ScaleLoader"/>
+  </div>
 </template>
 
 <script setup>
 import HeaderLayout from '../../layouts/BoldHeader.vue';
 import FormLayout from '../../layouts/Form.vue';
+import Toast from '../../components/Toast.vue';
+
+import { onAuthStateChanged } from 'firebase/auth';
+import { storeToRefs } from 'pinia';
+
+import { useUserStore } from '~~/store/user.js';
+
 import {
   validateEmail,
   validatePassword,
 } from '~~/composables/useValidation.js';
-import { reactive } from 'vue';
 
-import { useUserStore } from '~~/store/user';
+import {useToast} from '~~/composables/useToast.js';
+
+import { signUp } from '~~/composables/useAuth.js';
+
+import { auth } from '~~/firebase/config.js';
+
+import { reactive, ref } from 'vue';
+
+const ScaleLoader = resolveComponent('ScaleLoader');
+
+const userStore = useUserStore();
+
+const { authenticationError } = storeToRefs(userStore);
+
+const showToast = ref(false);
+const showLoader = ref(false);
+const toastOptions = ref({
+  text: '',
+  isError: false,
+  isWarning: false,
+});
 
 const email = reactive({
   value: '',
@@ -83,17 +120,80 @@ const password = reactive({
   errorMessage: '',
 });
 
-const userStore = useUserStore();
+const redirectToProfile = () => navigateTo('/profile');
 
-const handleSubmit = () => {
-  if (!validateEmail(email) && !validatePassword(password)) {
-    console.warn('Inputs are not valid');
-    return;
-  } else {
-    console.log('Inputs are valid');
-    userStore.signUserUp(email.value, password.value)
-  }
+const formatAuthError = (error) => {
+  if (error) {
+    let formattedError = error.replace('auth/', '').split('-').join(' ');
+    return formattedError;
+  } else return;
 };
+
+watch(authenticationError, () => {
+  if (userStore.authenticationError === null) {
+    toastOptions.value.text = '';
+    showToast.value = false;
+  } else {
+    showLoader.value = false;
+    let errorMsg = formatAuthError(userStore.authenticationError);
+    toastOptions.value.isError = true;
+    toastOptions.value.text = errorMsg;
+    useToast(showToast, userStore.resetAuthenticationError)
+  }
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    showLoader.value = false;
+    toastOptions.value.isError = false;
+    toastOptions.value.text = 'Login successful';
+    useToast(showToast, redirectToProfile)
+  }
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* enter transitions */
+.toast-enter-active {
+  animation: wobble 0.5s ease;
+}
+/* leave transitions */
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.toast-leave-active {
+  transition: all 0.3s ease;
+}
+
+@keyframes wobble {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(8px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(-8px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(-4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+</style>
