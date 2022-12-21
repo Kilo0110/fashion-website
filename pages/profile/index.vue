@@ -1,5 +1,5 @@
 <template>
-  <Navigation :activeItem=4 />
+  <Navigation :activeItem="4" />
   <main class="main bg-gray-50 min-h-[100vh] px-3 pt-3">
     <BoldHeader headerTitle="My Profile" />
     <div class="user-bio-container flex gap-3">
@@ -88,7 +88,10 @@
           </client-only>
         </li>
       </NuxtLink>
-      <li class="profile-action cursor-pointer relative" @click="logUserOut">
+      <li
+        class="profile-action cursor-pointer relative"
+        @click="userStore.logUserOut()"
+      >
         <p class="text-sm font-bold">Logout</p>
         <p class="text-xs text-gray-400 font-bold">End your session</p>
         <client-only>
@@ -100,21 +103,86 @@
       </li>
     </ul>
   </main>
+  <transition name="toast">
+    <Toast
+      text="Logout successful"
+      v-if="showToast"
+    />
+  </transition>
+    <div class="loading-overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-slate-800 opacity-40 flex justify-center items-center" v-if="showLoader">
+    <component :is="ScaleLoader"/>
+  </div>
 </template>
 
 <script setup>
 import BoldHeader from '~~/layouts/BoldHeader.vue';
 import { useUserStore } from '~~/store/user';
 
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '~~/firebase/config.js';
+import {useToast} from '~~/composables/useToast.js';
+
+const ScaleLoader = resolveComponent('ScaleLoader')
+
 const userStore = useUserStore();
 
 definePageMeta({
-  middleware: 'auth'
-})
+  middleware: 'auth',
+});
 
-const logUserOut = () => {
-  userStore.logUserOut()
-}
+const showToast = ref(false);
+const showLoader = ref(false);
+
+onAuthStateChanged(auth, (user) => {
+  showLoader.value = false
+  if (!user) {
+    useToast(showToast, () => navigateTo('/'))
+  }
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* enter transitions */
+.toast-enter-active {
+  animation: wobble 0.5s ease;
+}
+/* leave transitions */
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.toast-leave-active {
+  transition: all 0.3s ease;
+}
+
+@keyframes wobble {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(8px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(-8px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(-4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+</style>
