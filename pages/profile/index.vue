@@ -90,7 +90,7 @@
       </NuxtLink>
       <li
         class="profile-action cursor-pointer relative"
-        @click="userStore.logUserOut()"
+        @click="logUserOut"
       >
         <p class="text-sm font-bold">Logout</p>
         <p class="text-xs text-gray-400 font-bold">End your session</p>
@@ -127,18 +127,22 @@ const ScaleLoader = resolveComponent('ScaleLoader')
 const userStore = useUserStore();
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: 'user-auth',
 });
 
 const showToast = ref(false);
 const showLoader = ref(false);
 
+const logUserOut = () => {
+  userStore.logUserOut()
+  useToast(showToast, () => navigateTo('/'))
+}
+
 onAuthStateChanged(auth, (user) => {
-  showLoader.value = false
   if (!user) {
-    useToast(showToast, () => navigateTo('/'))
+    navigateTo('/auth/signin')
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
