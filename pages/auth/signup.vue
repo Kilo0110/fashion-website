@@ -120,7 +120,7 @@ const password = reactive({
   errorMessage: '',
 });
 
-const redirectToProfile = () => navigateTo('/profile');
+const redirectToProfileEditPage = () => navigateTo('/profile/edit');
 
 const formatAuthError = (error) => {
   if (error) {
@@ -147,7 +147,7 @@ onAuthStateChanged(auth, (user) => {
     showLoader.value = false;
     toastOptions.value.isError = false;
     toastOptions.value.text = 'Login successful';
-    useToast(showToast, redirectToProfile)
+    useToast(showToast, redirectToProfileEditPage)
   }
 });
 </script>
