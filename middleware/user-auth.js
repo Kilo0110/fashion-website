@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   // get the current user state
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      return navigateTo('/auth/signin');
+      return navigateTo('/auth/');
     }
   });
 });
