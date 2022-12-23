@@ -118,8 +118,6 @@
 import BoldHeader from '~~/layouts/BoldHeader.vue';
 import { useUserStore } from '~~/store/user';
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '~~/firebase/config.js';
 import {useToast} from '~~/composables/useToast.js';
 
 const ScaleLoader = resolveComponent('ScaleLoader')
@@ -137,12 +135,6 @@ const logUserOut = () => {
   userStore.logUserOut()
   useToast(showToast, () => navigateTo('/'))
 }
-
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    navigateTo('/auth/signin')
-  }
-})
 </script>
 
 <style lang="scss" scoped>
