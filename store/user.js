@@ -9,6 +9,8 @@ import {
 import { defineStore, skipHydrate } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
 
+import { createUser } from '~~/firebase/db';
+
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: useLocalStorage('user'),
@@ -20,6 +22,7 @@ export const useUserStore = defineStore('user', {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const data = res.user;
         this.user = data;
+        createUser(data.uid);
       } catch (error) {
         this.authenticationError = error.code;
       }
