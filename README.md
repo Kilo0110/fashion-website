@@ -28,4 +28,4 @@ pnpm run dev
 
 - While I'll tried my best to recreate the design, it isn't an exact 1-to-1 particularly in the icons
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+Checkout the [live site](https://fashion-website.onrender.com) to view it.
