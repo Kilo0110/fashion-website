@@ -7,19 +7,19 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyCiPGjXgi2Um-VfnNjUvtX16TvjA7mMUyI',
-  authDomain: 'fashion-website-ce94e.firebaseapp.com',
-  projectId: 'fashion-website-ce94e',
-  storageBucket: 'fashion-website-ce94e.appspot.com',
-  messagingSenderId: '344606167151',
-  appId: '1:344606167151:web:1da49bd4646fd381f5bd9a',
+  apiKey: 'AIzaSyA4TApxWj2sQyVHFPs572pcFbWuI2BLAKg',
+  authDomain: 'fashion-website-d24b5.firebaseapp.com',
+  projectId: 'fashion-website-d24b5',
+  storageBucket: 'fashion-website-d24b5.appspot.com',
+  messagingSenderId: '74078377538',
+  appId: '1:74078377538:web:a139d94024f96791d77fdb',
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// init firebase auth
+// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
+// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
 export { auth, db };
