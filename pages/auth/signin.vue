@@ -67,6 +67,7 @@
       v-if="showToast"
     />
   </transition>
+  <!-- eslint-disable-next-line vue/no-multiple-template-root -->
   <div
     class="loading-overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-slate-800 opacity-40 flex justify-center items-center"
     v-if="showLoader"
@@ -93,7 +94,7 @@ import {useToast} from '~~/composables/useToast.js';
 
 import { signIn } from '~~/composables/useAuth.js';
 
-import { auth } from '~~/firebase/config.js';
+import { auth } from '~~/firebase/index.js';
 
 import { reactive, ref } from 'vue';
 
