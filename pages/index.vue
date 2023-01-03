@@ -19,7 +19,6 @@
             <p class="capitalize">New collection</p>
             <CallToActionBtn
               buttonText="Shop now"
-              :isColored="false"
             />
           </div>
         </swiper-slide>
@@ -31,7 +30,6 @@
             <p class="capitalize">Funky collection</p>
             <CallToActionBtn
               buttonText="Shop now"
-              :isColored="false"
             />
           </div>
         </swiper-slide>
