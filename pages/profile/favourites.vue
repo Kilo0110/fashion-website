@@ -1,6 +1,7 @@
 <template>
   <NormalHeader headerTitle="Favourites" />
   <Navigation :activeItem="3" />
+  <!-- eslint-disable-next-line vue/no-multiple-template-root -->
   <main class="main px-3 pt-3 bg-gray-50">
     <swiper
       class="filter-carousel"
