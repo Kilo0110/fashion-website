@@ -121,7 +121,7 @@ const password = reactive({
   errorMessage: '',
 });
 
-const redirectToProfileEditPage = () => navigateTo('/profile/edit');
+const redirectToProfileEditPage = () => navigateTo('/profile/verification');
 
 const formatAuthError = (error) => {
   if (error) {
