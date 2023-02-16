@@ -151,6 +151,12 @@ const saveEdit = () => {
       nationality: nationality.value,
     };
     updateUser(userStore.user.uid, userInfo)
+    toastOptions.value.isError = false;
+    toastOptions.value.text = 'Profile successfully created';
+    useToast(showToast);
+    navigateTo('/profile')
+    setTimeout(() => {
+    }, 3000);
   }
 };
 </script>
