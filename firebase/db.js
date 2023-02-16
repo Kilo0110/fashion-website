@@ -1,6 +1,6 @@
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 
-import { db } from '~~/firebase/config.js';
+import { db } from '~~/firebase/index.js';
 
 const createUser = async (uid) => {
   await setDoc(doc(db, 'users', uid), {
@@ -9,4 +9,11 @@ const createUser = async (uid) => {
   });
 };
 
-export { createUser };
+const updateUser = async (uid, data) => {
+  await updateDoc(doc(db, 'users', uid), {
+    ...data,
+    isIniatilized: true,
+  });
+};
+
+export { createUser, updateUser };

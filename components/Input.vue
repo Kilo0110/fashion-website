@@ -19,7 +19,7 @@
       <client-only>
         <font-awesome-icon
           @click="makePasswordVisible"
-          :icon="showPasswordIcon ? ['fas', 'eye-slash'] : ['fas', 'eye']"
+          :icon="showPasswordIcon ? ['fas', 'eye'] : ['fas', 'eye-slash']"
           class="absolute -translate-y-1/2 bg-white top-1/2 right-4 cursor-pointer"
         />
       </client-only>

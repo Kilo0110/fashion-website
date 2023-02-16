@@ -1,9 +1,10 @@
 // firebase imports
-import { auth } from '~~/firebase/config.js';
+import { auth } from '../firebase/index.js';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendEmailVerification,
 } from 'firebase/auth';
 
 import { defineStore, skipHydrate } from 'pinia';
@@ -20,9 +21,13 @@ export const useUserStore = defineStore('user', {
     async signUserUp(email, password) {
       try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        const data = res.user;
-        this.user = data;
-        createUser(data.uid);
+        const user = res.user;
+        const actionCodeSettings = {
+          url: 'https://fashion-website.onrender.com/profile/edit',
+        };
+        await sendEmailVerification(user, actionCodeSettings);
+        this.user = user;
+        createUser(user.uid);
       } catch (error) {
         this.authenticationError = error.code;
       }
