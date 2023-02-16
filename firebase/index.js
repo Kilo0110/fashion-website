@@ -19,10 +19,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
-connectAuthEmulator(auth, 'http://localhost:9099');
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
-connectFirestoreEmulator(db, 'localhost', 8080);
+
+if (process.env.NODE_ENV === 'development') {
+  connectAuthEmulator(auth, 'http://localhost:9099');
+  connectFirestoreEmulator(db, 'localhost', 8080);
+}
 
 export { auth, db };
